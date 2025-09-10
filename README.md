@@ -2,7 +2,7 @@
 
 A deep learning project for skin cancer classification using hybrid CNN-ViT architecture on ISIC2024 and PAD-UFES-20 datasets.
 
-## 📊 Datasets
+##  Datasets
 
 ### ISIC2024 Dataset
 - **Size**: 29,868 images (393 malignant, 29,475 benign)
@@ -23,7 +23,7 @@ A deep learning project for skin cancer classification using hybrid CNN-ViT arch
   - Binary symptoms: itch, grew, hurt, changed, bleed, elevation, biopsed
   - Target mapping: Benign (ACK, NEV, SEK) = 0, Malignant (BCC, MEL, SCC, BOD) = 1
 
-## 🏗️ Model Architecture
+##  Model Architecture
 
 ### Hybrid CNN-ViT Model
 ```
@@ -63,7 +63,7 @@ Input (224×224×3)
 2. **Vision Transformer (ViT)**: Pure transformer approach  
 3. **Hybrid CNN-ViT**: Combined architecture (recommended)
 
-## 🔄 Data Processing Pipeline
+##  Data Processing Pipeline
 
 ### Image Processing
 1. **Preprocessing**: Resize to 224×224, RGB conversion, pixel normalization
@@ -81,7 +81,7 @@ Input (224×224×3)
 - **Cross-validation**: 3-fold StratifiedGroupKFold
 - **Patient-level splitting**: Prevents data leakage
 
-## 🚀 Usage
+##  Usage
 
 ### Requirements
 ```bash
@@ -93,12 +93,12 @@ pip install imbalanced-learn tqdm joblib pillow
 
 ### Training ISIC2024 Model
 ```bash
-python dacs_isic.py
+python SCC_isic.py
 ```
 
 ### Training PAD-UFES-20 Model
 ```bash
-python dacs_pad.py
+python SCC_pad.py
 ```
 
 ### Configuration
@@ -108,7 +108,7 @@ Key parameters in the scripts:
 - `N_SPLITS`: Number of cross-validation folds
 - `IMG_MODEL_BATCH_SIZE`: Batch size for training
 
-## 📈 Performance Results
+##  Performance Results
 
 ### ISIC2024 Results (with SMOTE)
 | Model | AUC | Raw pAUC (0-20%) | Norm pAUC (0-20%) |
@@ -124,7 +124,7 @@ Key parameters in the scripts:
 | Hybrid | Malignant | 0.6387 | 0.9612 | 0.7674 |
 | ViT | Overall | 0.7338 | 0.9113 | 0.8129 |
 
-## 🎯 Key Features
+##  Key Features
 
 - **Multi-modal Learning**: Combines image and metadata features
 - **Advanced Augmentation**: SMOTE on feature space rather than raw images
@@ -133,14 +133,14 @@ Key parameters in the scripts:
 - **Clinical Relevance**: Real-world applicable with PAD-UFES-20 dataset
 
 
-## 🔬 Research Contributions
+##  Research Contributions
 
 1. **Hybrid Architecture**: Novel combination of CNN and ViT for skin lesion classification
 2. **Feature-level SMOTE**: Applying data augmentation on extracted features rather than raw images
 3. **Multi-dataset Validation**: Comprehensive evaluation on both research and clinical datasets
 4. **Metadata Integration**: Effective fusion of image and clinical metadata
 
-## 📊 Evaluation Metrics
+##  Evaluation Metrics
 
 - **AUC-ROC**: Area Under Receiver Operating Characteristic curve
 - **pAUC**: Partial AUC for specific false positive rate ranges
