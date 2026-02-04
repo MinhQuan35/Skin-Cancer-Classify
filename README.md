@@ -1,92 +1,205 @@
 # Skin Cancer Classification Project
 
-A deep learning project for skin cancer classification using hybrid CNN-ViT architecture on ISIC2024 and PAD-UFES-20 datasets.
+A deep learning project for skin cancer classification using ensemble learning combining EfficientNet with gradient boosting models (LightGBM, XGBoost, CatBoost) on ISIC2024 dataset.
 
-##  Datasets
+## 📊 Dataset
 
-### ISIC2024 Dataset
-- **Size**: 29,868 images (393 malignant, 29,475 benign)
-- **Format**: Variable size images, resized to 224×224 pixels
-- **Features**: 161+ metadata features including:
-  - 34 numerical columns (NUM_COLS)
-  - 43 generated columns (NEW_NUM_COLS)
-  - 6 categorical columns (CAT_COLS) with one-hot encoding
-  - 1 special column (count_per_patient)
-  - 77 normalized columns (NORM_COLS)
-  - 12 image feature columns from ResNet18 extraction
+### ISIC2024 Dataset Statistics
+- **Total Training Samples**: 353,805 samples
+- **Total Test Samples**: 47,254 samples
+- **Total Dataset Size**: 401,059 samples
+- **Number of Features**: 272 metadata features
+- **Image Size**: Resized to 224×224 pixels
 
-### PAD-UFES-20 Dataset
-- **Size**: 2,298 images from 1,373 patients
-- **Lesion Types**: 6 categories (BCC, MEL, SCC, ACK, NEV, SEK)
-- **Features**: 26 clinical metadata features including:
-  - Quantitative: age, diameter_1, diameter_2
-  - Binary symptoms: itch, grew, hurt, changed, bleed, elevation, biopsed
-  - Target mapping: Benign (ACK, NEV, SEK) = 0, Malignant (BCC, MEL, SCC, BOD) = 1
+### Class Distribution
+| Class | Label | Percentage |
+|-------|-------|------------|
+| Benign | 0 | 99.8966% |
+| Malignant | 1 | 0.1034% |
 
-##  Model Architecture
+> ⚠️ **Note**: The dataset is highly imbalanced with only ~0.1% malignant samples
 
-### Hybrid CNN-ViT Model
+### Feature Categories
+- **Numerical Columns**: 34 raw features
+- **Generated Columns**: 43 engineered features
+- **Categorical Columns**: 6 features (one-hot encoded)
+- **Normalized Columns**: 77 features
+- **Image Features**: 12 columns from ResNet18 extraction
+- **Special Features**: Patient-level aggregations
+
+## 🏗️ Model Architecture
+
+### Hybrid CNN-ViT Model (EfficientNetViTHybridModel)
+
+The core image model combines **EfficientNet-B0** (CNN) and **Vision Transformer (ViT-Base)** with attention-weighted feature fusion:
+
 ```
-Input (224×224×3)
-    ↓
-┌─────────────────────┐    ┌─────────────────────┐
-│   EfficientNet-B0   │    │   Vision Transformer │
-│   (CNN Branch)      │    │   (ViT Branch)      │
-│                     │    │                     │
-│   Features: 1280    │    │   Features: 768     │
-└─────────────────────┘    └─────────────────────┘
-    ↓                           ↓
-┌─────────────────────┐    ┌─────────────────────┐
-│   Global Avg Pool   │    │   Global Avg Pool   │
-└─────────────────────┘    └─────────────────────┘
-    ↓                           ↓
-    └─────────── Concatenate ───────────┘
-                    ↓
-            ┌─────────────────────┐
-            │   FC Layer (512)    │
-            │   ReLU + Dropout    │
-            └─────────────────────┘
-                    ↓
-            ┌─────────────────────┐
-            │   FC Layer (256)    │
-            │   ReLU + Dropout    │
-            └─────────────────────┘
-                    ↓
-            ┌─────────────────────┐
-            │   Output (1)        │
-            │   Sigmoid           │
-            └─────────────────────┘
+                        Input Image (224×224×3)
+                                  │
+                 ┌────────────────┴────────────────┐
+                 │                                 │
+                 ▼                                 ▼
+    ┌─────────────────────────┐     ┌─────────────────────────┐
+    │   EfficientNet-B0       │     │   ViT-Base-Patch16      │
+    │   (Pretrained ImageNet) │     │   (Pretrained ImageNet) │
+    │                         │     │                         │
+    │   Conv Features: 1280   │     │   197 Patch Tokens      │
+    │   Global Avg Pooling    │     │   768 dimensions each   │
+    └───────────┬─────────────┘     └───────────┬─────────────┘
+                │                               │
+                ▼                               ▼
+    ┌─────────────────────────┐     ┌─────────────────────────┐
+    │   Attention Module      │     │   Feature Processing    │
+    │   Linear(1280→512)      │     │   CLS Token + Patch Avg │
+    │   Tanh → Linear→Sigmoid │     │   LayerNorm + GELU      │
+    └───────────┬─────────────┘     └───────────┬─────────────┘
+                │                               │
+                │     ┌─────────────────────────┤
+                │     │                         │
+                │     ▼                         ▼
+                │     │         ┌─────────────────────────┐
+                │     │         │   Attention Module      │
+                │     │         │   Linear(768→512)       │
+                │     │         │   Tanh → Linear→Sigmoid │
+                │     │         └───────────┬─────────────┘
+                │     │                     │
+                ▼     ▼                     ▼
+    ┌─────────────────────────────────────────────────────┐
+    │              Feature Concatenation                   │
+    │              Eff(1280) ⊕ ViT(768) = 2048            │
+    └───────────────────────┬─────────────────────────────┘
+                            │
+                            ▼
+    ┌─────────────────────────────────────────────────────┐
+    │                  Fusion Network                      │
+    │  ┌───────────────────────────────────────────────┐  │
+    │  │ Linear(2048→1024) + BN + ReLU + Dropout(0.4)  │  │
+    │  │ Linear(1024→512)  + BN + ReLU + Dropout(0.3)  │  │
+    │  │ Linear(512→256)   + BN + ReLU + Dropout(0.2)  │  │
+    │  │ Linear(256→1)     → Sigmoid                   │  │
+    │  └───────────────────────────────────────────────┘  │
+    └───────────────────────┬─────────────────────────────┘
+                            │
+                            ▼
+                    Binary Classification
+                    (Malignant/Benign)
+```
+
+### Model Components
+
+| Component | Architecture | Parameters |
+|-----------|--------------|------------|
+| **CNN Branch** | EfficientNet-B0 | Last 4 layers trainable |
+| **ViT Branch** | ViT-Base-Patch16-224 | Last 4 layers trainable |
+| **EfficientNet Features** | 1280 dimensions | Global Average Pooling |
+| **ViT Features** | 768 dimensions | CLS Token + Patch Avg |
+| **Fusion Network** | 4-layer MLP | 2048→1024→512→256→1 |
+| **Attention** | Soft attention | Per-branch feature weighting |
+
+### Ensemble Pipeline
+```
+                         ┌─────────────────┐
+                         │   Input Data    │
+                         └────────┬────────┘
+                                  │
+              ┌───────────────────┼───────────────────┐
+              │                   │                   │
+              ▼                   ▼                   ▼
+    ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐
+    │  CNN-ViT Hybrid │ │   TabularBoost  │ │   Metadata      │
+    │  (EfficientNet  │ │   (LGB/XGB/CAT) │ │   Features      │
+    │   + ViT-Base)   │ │                 │ │                 │
+    └────────┬────────┘ └────────┬────────┘ └────────┬────────┘
+             │                   │                   │
+             └───────────────────┼───────────────────┘
+                                 ▼
+                       ┌─────────────────┐
+                       │   Ensemble      │
+                       │   (Weighted)    │
+                       └─────────────────┘
 ```
 
 ### Available Models
-1. **EfficientNet-B0**: Pure CNN approach
-2. **Vision Transformer (ViT)**: Pure transformer approach  
-3. **Hybrid CNN-ViT**: Combined architecture (recommended)
+1. **EfficientNet-B0**: Pure CNN with attention mechanism
+2. **Vision Transformer (ViT-Base)**: Pure transformer approach  
+3. **Hybrid CNN-ViT**: Combined architecture with dual attention (recommended)
+4. **LightGBM**: Gradient boosting on metadata features
+5. **XGBoost**: Gradient boosting with SMOTE sampling
+6. **CatBoost**: Categorical-aware gradient boosting
 
-##  Data Processing Pipeline
+## 🔄 Data Processing Pipeline
 
-### Image Processing
-1. **Preprocessing**: Resize to 224×224, RGB conversion, pixel normalization
-2. **Feature Extraction**: ResNet18 pre-trained model for deep features
-3. **Augmentation**: Flip, rotation, brightness, blur, erasing (training only)
+### Sampling Strategies (for imbalanced data)
+- **SMOTE**: Synthetic Minority Over-sampling
+- **Borderline-SMOTE**: Focus on borderline samples
+- **ADASYN**: Adaptive synthetic sampling
+- **SMOTE-Tomek**: SMOTE + Tomek links cleaning
 
-### Metadata Processing
-1. **Missing Values**: Imputation strategies
-2. **Categorical Encoding**: One-hot encoding for categorical variables
-3. **Feature Engineering**: New feature creation and normalization
-4. **SMOTE**: Applied on feature space (ISIC2024 only, PAD-UFES-20 is balanced)
+### Cross-Validation
+- **3-Fold StratifiedGroupKFold**: Stratified by class, grouped by patient
+- **Patient-level splitting**: Prevents data leakage between folds
+- **Best sampling strategy**: Automatically selected based on validation pAUC
 
-### Data Splitting
-- **ISIC2024**: 80% train, 10% validation, 10% test
-- **Cross-validation**: 3-fold StratifiedGroupKFold
-- **Patient-level splitting**: Prevents data leakage
+## 📈 Performance Results
 
-##  Usage
+### Ensemble Model Results (Test Set)
+![Ensemble ROC Curves](20250526_130537_ensemble_img_metadata/plots/ensemble_roc_curves.png)
+
+| Model | ROC AUC | pAUC (0-10% FPR) | pAUC (0-20% FPR) |
+|-------|---------|------------------|------------------|
+| **Ensemble** | **0.9484** | 0.5840 | 0.5549 |
+| LightGBM | 0.9095 | 0.6373 | 0.7040 |
+| CatBoost | 0.8680 | 0.5683 | 0.6373 |
+| XGBoost | 0.8631 | 0.5548 | 0.6021 |
+| EfficientNet | 0.8432 | 0.4802 | 0.6009 |
+
+### Cross-Validation Results (Best Strategies)
+
+#### LightGBM (Best: SMOTE-Tomek, pAUC=0.8019)
+| Metric | Mean | Std |
+|--------|------|-----|
+| ROC AUC | 0.9490 | ±0.0252 |
+| pAUC (0-10% FPR) | 0.6833 | ±0.1216 |
+| pAUC (0-20% FPR) | 0.7864 | ±0.0988 |
+
+#### XGBoost (Best: SMOTE, pAUC=0.8313)
+| Metric | Mean | Std |
+|--------|------|-----|
+| ROC AUC | 0.9590 | ±0.0184 |
+| pAUC (0-10% FPR) | 0.7199 | ±0.1005 |
+| pAUC (0-20% FPR) | 0.8250 | ±0.0645 |
+
+#### CatBoost (Best: SMOTE, pAUC=0.7813)
+| Metric | Mean | Std |
+|--------|------|-----|
+| ROC AUC | 0.9510 | ±0.0345 |
+| pAUC (0-10% FPR) | 0.6975 | ±0.1397 |
+| pAUC (0-20% FPR) | 0.7516 | ±0.2166 |
+
+#### EfficientNet (3-Fold CV)
+| Metric | Mean | Std |
+|--------|------|-----|
+| ROC AUC | 0.8477 | ±0.0190 |
+| pAUC (0-10% FPR) | 0.4275 | ±0.0063 |
+| pAUC (0-20% FPR) | 0.5516 | ±0.0052 |
+
+## ⏱️ Training Duration
+
+| Component | Duration |
+|-----------|----------|
+| LightGBM | 0:36:55 |
+| XGBoost | 0:35:07 |
+| CatBoost | 0:34:15 |
+| EfficientNet | 13:42:33 |
+| Test Evaluation | 0:03:27 |
+| **Total Pipeline** | **15:32:40** |
+
+## 🚀 Usage
 
 ### Requirements
 ```bash
 pip install torch torchvision timm
-pip install scikit-learn lightgbm xgboost
+pip install scikit-learn lightgbm xgboost catboost
 pip install pandas polars numpy matplotlib seaborn
 pip install imbalanced-learn tqdm joblib pillow
 ```
@@ -103,50 +216,53 @@ python SCC_pad.py
 
 ### Configuration
 Key parameters in the scripts:
-- `MODEL_TYPE`: 'efficientnet', 'vit', or 'hybrid'
-- `USE_SMOTE`: Enable/disable SMOTE sampling
-- `N_SPLITS`: Number of cross-validation folds
-- `IMG_MODEL_BATCH_SIZE`: Batch size for training
+- `N_SPLITS`: Number of cross-validation folds (default: 3)
+- `IMG_MODEL_BATCH_SIZE`: Batch size for EfficientNet training
+- `SAMPLING_STRATEGIES`: List of sampling methods to evaluate
 
-##  Performance Results
+## 📁 Output Structure
 
-### ISIC2024 Results (with SMOTE)
-| Model | AUC | Raw pAUC (0-20%) | Norm pAUC (0-20%) |
-|-------|-----|-------------------|-------------------|
-| Hybrid | 0.9408 | 0.1427 | 0.7136 |
-| ViT | 0.9405 | 0.1403 | 0.7013 |
-| CNN | 0.9311 | 0.1418 | 0.7090 |
+```
+20250526_130537_ensemble_img_metadata/
+├── cat/
+│   ├── models/           # Saved CatBoost models
+│   └── plots/            # ROC curves, metrics distribution
+├── efficientnet/
+│   ├── models/           # Saved EfficientNet checkpoints
+│   └── plots/            # Training curves
+├── lgb/
+│   ├── models/           # Saved LightGBM models
+│   └── plots/            # Feature importance, ROC curves
+├── xgb/
+│   ├── models/           # Saved XGBoost models
+│   └── plots/            # ROC curves, metrics
+├── plots/
+│   └── ensemble_roc_curves.png   # Final ensemble comparison
+├── models/               # Final ensemble models
+└── text/
+    ├── pipeline_log.txt          # Full training log
+    ├── ensemble_results.txt      # Final test results
+    └── [model]_results.txt       # Per-model results
+```
 
-### PAD-UFES-20 Results
-| Model | Class | Precision | Recall | F1-score |
-|-------|-------|-----------|--------|----------|
-| Hybrid | Benign | 0.9444 | 0.5484 | 0.6939 |
-| Hybrid | Malignant | 0.6387 | 0.9612 | 0.7674 |
-| ViT | Overall | 0.7338 | 0.9113 | 0.8129 |
+## 🔑 Key Features
 
-##  Key Features
+- **Multi-modal Learning**: Combines image features (EfficientNet) with tabular metadata (Gradient Boosting)
+- **Ensemble Strategy**: Weighted combination of multiple model predictions
+- **Advanced Sampling**: Multiple SMOTE variants to handle extreme class imbalance
+- **Cross-validation**: Robust evaluation with patient-level stratified splitting
+- **GPU Acceleration**: CUDA support for EfficientNet training (RTX 4050 Laptop GPU)
+- **Comprehensive Logging**: Detailed pipeline logs with timing information
 
-- **Multi-modal Learning**: Combines image and metadata features
-- **Advanced Augmentation**: SMOTE on feature space rather than raw images
-- **Cross-validation**: Robust evaluation with patient-level splitting
-- **Multiple Architectures**: EfficientNet, ViT, and Hybrid options
-- **Clinical Relevance**: Real-world applicable with PAD-UFES-20 dataset
+## 📊 Evaluation Metrics
 
-
-##  Research Contributions
-
-1. **Hybrid Architecture**: Novel combination of CNN and ViT for skin lesion classification
-2. **Feature-level SMOTE**: Applying data augmentation on extracted features rather than raw images
-3. **Multi-dataset Validation**: Comprehensive evaluation on both research and clinical datasets
-4. **Metadata Integration**: Effective fusion of image and clinical metadata
-
-##  Evaluation Metrics
-
-- **AUC-ROC**: Area Under Receiver Operating Characteristic curve
-- **pAUC**: Partial AUC for specific false positive rate ranges
-- **Precision, Recall, F1-score**: Standard classification metrics
-- **Confusion Matrix**: Detailed classification analysis
+- **ROC AUC**: Area Under Receiver Operating Characteristic curve
+- **pAUC (0-10% FPR)**: Partial AUC at low false positive rates (clinical relevance)
+- **pAUC (0-20% FPR)**: Partial AUC for broader FPR range
+- **Normalized pAUC**: Scaled partial AUC for easier interpretation
 
 ---
 
-*This project implements state-of-the-art deep learning techniques for automated skin cancer detection, combining the strengths of convolutional neural networks and vision transformers for improved diagnostic accuracy.*
+*Experiment: `20250526_130537_ensemble_img_metadata`*
+*GPU: NVIDIA GeForce RTX 4050 Laptop GPU*
+*CUDA Version: 12.1*
