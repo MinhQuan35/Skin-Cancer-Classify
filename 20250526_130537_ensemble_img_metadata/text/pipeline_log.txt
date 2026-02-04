@@ -1,0 +1,598 @@
+=== Pipeline Log Started at 2025-05-26 13:05:37 ===
+
+[2025-05-26 13:05:37] === Starting Pipeline ===
+[2025-05-26 13:05:37] Start time: 2025-05-26 13:05:37
+[2025-05-26 13:05:37] Log file: out/20250526_130537_ensemble_img_metadata/text/pipeline_log.txt
+[2025-05-26 13:05:37] 
+=== Checking GPU Availability ===
+[2025-05-26 13:05:39] CUDA is available. GPU Device: NVIDIA GeForce RTX 4050 Laptop GPU
+[2025-05-26 13:05:39] Number of GPUs: 1
+[2025-05-26 13:05:39] CUDA Version: 12.1
+[2025-05-26 13:05:39] LightGBM version: 4.6.0
+[2025-05-26 13:05:39] LightGBM GPU support not available: Unknown tree learner type gpu
+[2025-05-26 13:05:39] XGBoost version: 3.0.0
+[2025-05-26 13:05:39] XGBoost GPU support not available: [13:05:39] C:\actions-runner\_work\xgboost\xgboost\src\objective\init_estimation.h:22: Check failed: info.labels.Shape(0) == info.num_row_ (0 vs. 10) : Invalid shape of labels.
+[2025-05-26 13:05:39] CatBoost version: 1.2.8
+[2025-05-26 13:05:39] CatBoost GPU support not available: Label in X has not been initialized.
+[2025-05-26 13:05:39] Using LightGBM with CPU (GPU not available for LightGBM)
+[2025-05-26 13:05:39] Using XGBoost with CPU (GPU not available for XGBoost)
+[2025-05-26 13:05:39] Using CatBoost with CPU (GPU not available for CatBoost)
+[2025-05-26 13:05:39] 
+=== Data Loading and Preprocessing ===
+[2025-05-26 13:05:39] Reading training data...
+[2025-05-26 13:05:54] Training data loaded: 353805 samples
+[2025-05-26 13:05:54] Reading test data...
+[2025-05-26 13:05:56] Test data loaded: 47254 samples
+[2025-05-26 13:05:56] 
+Validating data...
+[2025-05-26 13:05:56] Data validation passed
+[2025-05-26 13:05:56] 
+Class distribution before sampling:
+[2025-05-26 13:05:56] Class 0: 99.8966%
+[2025-05-26 13:05:56] Class 1: 0.1034%
+[2025-05-26 13:05:56] 
+Preprocessing data...
+[2025-05-26 13:05:56] Data preprocessing completed
+[2025-05-26 13:05:56] 
+Converting features to numeric...
+[2025-05-26 13:05:56] Feature conversion completed
+[2025-05-26 13:05:56] 
+Preparing data for training...
+[2025-05-26 13:05:56] Training data prepared: 353805 samples, 272 features
+[2025-05-26 13:05:56] Test data prepared: 47254 samples, 272 features
+[2025-05-26 13:05:56] 
+=== Model Training and Evaluation ===
+[2025-05-26 13:05:56] 
+--- LightGBM Training ---
+[2025-05-26 13:05:56] Starting LightGBM training at 13:05:56
+[2025-05-26 13:05:56] 
+Training fold 1/3 with smote...
+[2025-05-26 13:06:22] 
+Fold 1 Results:
+[2025-05-26 13:06:22] ROC AUC: 0.9444
+[2025-05-26 13:06:22] pAUC (0-10% FPR): 0.0576
+[2025-05-26 13:06:22] Normalized pAUC (0-10% FPR): 0.5763
+[2025-05-26 13:06:22] pAUC (0-20% FPR): 0.1555
+[2025-05-26 13:06:22] Normalized pAUC (0-20% FPR): 0.7776
+[2025-05-26 13:06:22] 
+Training fold 2/3 with smote...
+[2025-05-26 13:06:46] 
+Fold 2 Results:
+[2025-05-26 13:06:46] ROC AUC: 0.9656
+[2025-05-26 13:06:46] pAUC (0-10% FPR): 0.0767
+[2025-05-26 13:06:46] Normalized pAUC (0-10% FPR): 0.7670
+[2025-05-26 13:06:46] pAUC (0-20% FPR): 0.1695
+[2025-05-26 13:06:46] Normalized pAUC (0-20% FPR): 0.8475
+[2025-05-26 13:06:46] 
+Training fold 3/3 with smote...
+[2025-05-26 13:07:08] 
+Fold 3 Results:
+[2025-05-26 13:07:08] ROC AUC: 0.9390
+[2025-05-26 13:07:08] pAUC (0-10% FPR): 0.0651
+[2025-05-26 13:07:08] Normalized pAUC (0-10% FPR): 0.6507
+[2025-05-26 13:07:08] pAUC (0-20% FPR): 0.1548
+[2025-05-26 13:07:08] Normalized pAUC (0-20% FPR): 0.7742
+[2025-05-26 13:07:08] Sampling Strategy smote:
+[2025-05-26 13:07:08]   Avg pAUC (0-20% FPR): 0.7998
+[2025-05-26 13:07:08]   Avg ROC AUC: 0.9496
+[2025-05-26 13:07:08] 
+Training fold 1/3 with borderline_smote...
+[2025-05-26 13:07:32] 
+Fold 1 Results:
+[2025-05-26 13:07:32] ROC AUC: 0.9407
+[2025-05-26 13:07:32] pAUC (0-10% FPR): 0.0663
+[2025-05-26 13:07:32] Normalized pAUC (0-10% FPR): 0.6629
+[2025-05-26 13:07:32] pAUC (0-20% FPR): 0.1529
+[2025-05-26 13:07:32] Normalized pAUC (0-20% FPR): 0.7643
+[2025-05-26 13:07:32] 
+Training fold 2/3 with borderline_smote...
+[2025-05-26 13:07:55] 
+Fold 2 Results:
+[2025-05-26 13:07:55] ROC AUC: 0.9655
+[2025-05-26 13:07:55] pAUC (0-10% FPR): 0.0766
+[2025-05-26 13:07:55] Normalized pAUC (0-10% FPR): 0.7657
+[2025-05-26 13:07:55] pAUC (0-20% FPR): 0.1648
+[2025-05-26 13:07:55] Normalized pAUC (0-20% FPR): 0.8238
+[2025-05-26 13:07:55] 
+Training fold 3/3 with borderline_smote...
+[2025-05-26 13:08:19] 
+Fold 3 Results:
+[2025-05-26 13:08:19] ROC AUC: 0.9333
+[2025-05-26 13:08:19] pAUC (0-10% FPR): 0.0609
+[2025-05-26 13:08:19] Normalized pAUC (0-10% FPR): 0.6086
+[2025-05-26 13:08:19] pAUC (0-20% FPR): 0.1325
+[2025-05-26 13:08:19] Normalized pAUC (0-20% FPR): 0.6625
+[2025-05-26 13:08:19] Sampling Strategy borderline_smote:
+[2025-05-26 13:08:19]   Avg pAUC (0-20% FPR): 0.7502
+[2025-05-26 13:08:19]   Avg ROC AUC: 0.9465
+[2025-05-26 13:08:20] 
+Training fold 1/3 with adasyn...
+[2025-05-26 13:08:43] 
+Fold 1 Results:
+[2025-05-26 13:08:43] ROC AUC: 0.9471
+[2025-05-26 13:08:43] pAUC (0-10% FPR): 0.0666
+[2025-05-26 13:08:43] Normalized pAUC (0-10% FPR): 0.6665
+[2025-05-26 13:08:43] pAUC (0-20% FPR): 0.1600
+[2025-05-26 13:08:43] Normalized pAUC (0-20% FPR): 0.7998
+[2025-05-26 13:08:43] 
+Training fold 2/3 with adasyn...
+[2025-05-26 13:09:07] 
+Fold 2 Results:
+[2025-05-26 13:09:07] ROC AUC: 0.9636
+[2025-05-26 13:09:07] pAUC (0-10% FPR): 0.0751
+[2025-05-26 13:09:07] Normalized pAUC (0-10% FPR): 0.7512
+[2025-05-26 13:09:07] pAUC (0-20% FPR): 0.1668
+[2025-05-26 13:09:07] Normalized pAUC (0-20% FPR): 0.8342
+[2025-05-26 13:09:07] 
+Training fold 3/3 with adasyn...
+[2025-05-26 13:09:29] 
+Fold 3 Results:
+[2025-05-26 13:09:29] ROC AUC: 0.9379
+[2025-05-26 13:09:29] pAUC (0-10% FPR): 0.0644
+[2025-05-26 13:09:29] Normalized pAUC (0-10% FPR): 0.6438
+[2025-05-26 13:09:29] pAUC (0-20% FPR): 0.1495
+[2025-05-26 13:09:29] Normalized pAUC (0-20% FPR): 0.7476
+[2025-05-26 13:09:29] Sampling Strategy adasyn:
+[2025-05-26 13:09:29]   Avg pAUC (0-20% FPR): 0.7939
+[2025-05-26 13:09:29]   Avg ROC AUC: 0.9496
+[2025-05-26 13:09:29] 
+Training fold 1/3 with smote_tomek...
+[2025-05-26 13:20:44] 
+Fold 1 Results:
+[2025-05-26 13:20:44] ROC AUC: 0.9464
+[2025-05-26 13:20:44] pAUC (0-10% FPR): 0.0677
+[2025-05-26 13:20:44] Normalized pAUC (0-10% FPR): 0.6767
+[2025-05-26 13:20:44] pAUC (0-20% FPR): 0.1582
+[2025-05-26 13:20:44] Normalized pAUC (0-20% FPR): 0.7910
+[2025-05-26 13:20:44] 
+Training fold 2/3 with smote_tomek...
+[2025-05-26 13:32:22] 
+Fold 2 Results:
+[2025-05-26 13:32:22] ROC AUC: 0.9689
+[2025-05-26 13:32:22] pAUC (0-10% FPR): 0.0757
+[2025-05-26 13:32:22] Normalized pAUC (0-10% FPR): 0.7573
+[2025-05-26 13:32:22] pAUC (0-20% FPR): 0.1695
+[2025-05-26 13:32:22] Normalized pAUC (0-20% FPR): 0.8477
+[2025-05-26 13:32:22] 
+Training fold 3/3 with smote_tomek...
+[2025-05-26 13:42:51] 
+Fold 3 Results:
+[2025-05-26 13:42:51] ROC AUC: 0.9357
+[2025-05-26 13:42:51] pAUC (0-10% FPR): 0.0673
+[2025-05-26 13:42:51] Normalized pAUC (0-10% FPR): 0.6731
+[2025-05-26 13:42:51] pAUC (0-20% FPR): 0.1534
+[2025-05-26 13:42:51] Normalized pAUC (0-20% FPR): 0.7671
+[2025-05-26 13:42:51] Sampling Strategy smote_tomek:
+[2025-05-26 13:42:51]   Avg pAUC (0-20% FPR): 0.8019
+[2025-05-26 13:42:51]   Avg ROC AUC: 0.9503
+[2025-05-26 13:42:51] Best Sampling Strategy: smote_tomek with pAUC = 0.8019
+[2025-05-26 13:42:51] LightGBM training completed in 0:36:55.021176
+[2025-05-26 13:42:51] 
+Saving LightGBM results...
+[2025-05-26 13:42:51] Generating LightGBM plots...
+[2025-05-26 13:42:53] Saving best LightGBM model...
+[2025-05-26 13:42:53] 
+--- XGBoost Training ---
+[2025-05-26 13:42:53] Starting XGBoost training at 13:42:53
+[2025-05-26 13:42:53] 
+Training fold 1/3 with smote...
+[2025-05-26 13:43:29] 
+Fold 1 Results:
+[2025-05-26 13:43:29] ROC AUC: 0.9531
+[2025-05-26 13:43:29] pAUC (0-10% FPR): 0.0683
+[2025-05-26 13:43:29] Normalized pAUC (0-10% FPR): 0.6832
+[2025-05-26 13:43:29] pAUC (0-20% FPR): 0.1620
+[2025-05-26 13:43:29] Normalized pAUC (0-20% FPR): 0.8098
+[2025-05-26 13:43:29] 
+Training fold 2/3 with smote...
+[2025-05-26 13:44:07] 
+Fold 2 Results:
+[2025-05-26 13:44:07] ROC AUC: 0.9725
+[2025-05-26 13:44:07] pAUC (0-10% FPR): 0.0816
+[2025-05-26 13:44:07] Normalized pAUC (0-10% FPR): 0.8163
+[2025-05-26 13:44:07] pAUC (0-20% FPR): 0.1759
+[2025-05-26 13:44:07] Normalized pAUC (0-20% FPR): 0.8794
+[2025-05-26 13:44:07] 
+Training fold 3/3 with smote...
+[2025-05-26 13:44:44] 
+Fold 3 Results:
+[2025-05-26 13:44:44] ROC AUC: 0.9540
+[2025-05-26 13:44:44] pAUC (0-10% FPR): 0.0693
+[2025-05-26 13:44:44] Normalized pAUC (0-10% FPR): 0.6927
+[2025-05-26 13:44:44] pAUC (0-20% FPR): 0.1609
+[2025-05-26 13:44:44] Normalized pAUC (0-20% FPR): 0.8047
+[2025-05-26 13:44:44] Sampling Strategy smote:
+[2025-05-26 13:44:44]   Avg pAUC (0-20% FPR): 0.8313
+[2025-05-26 13:44:44]   Avg ROC AUC: 0.9599
+[2025-05-26 13:44:44] 
+Training fold 1/3 with borderline_smote...
+[2025-05-26 13:45:20] 
+Fold 1 Results:
+[2025-05-26 13:45:20] ROC AUC: 0.9481
+[2025-05-26 13:45:20] pAUC (0-10% FPR): 0.0701
+[2025-05-26 13:45:20] Normalized pAUC (0-10% FPR): 0.7010
+[2025-05-26 13:45:20] pAUC (0-20% FPR): 0.1590
+[2025-05-26 13:45:20] Normalized pAUC (0-20% FPR): 0.7950
+[2025-05-26 13:45:20] 
+Training fold 2/3 with borderline_smote...
+[2025-05-26 13:45:54] 
+Fold 2 Results:
+[2025-05-26 13:45:54] ROC AUC: 0.9674
+[2025-05-26 13:45:54] pAUC (0-10% FPR): 0.0718
+[2025-05-26 13:45:54] Normalized pAUC (0-10% FPR): 0.7176
+[2025-05-26 13:45:54] pAUC (0-20% FPR): 0.1698
+[2025-05-26 13:45:54] Normalized pAUC (0-20% FPR): 0.8491
+[2025-05-26 13:45:55] 
+Training fold 3/3 with borderline_smote...
+[2025-05-26 13:46:31] 
+Fold 3 Results:
+[2025-05-26 13:46:31] ROC AUC: 0.9529
+[2025-05-26 13:46:31] pAUC (0-10% FPR): 0.0640
+[2025-05-26 13:46:31] Normalized pAUC (0-10% FPR): 0.6400
+[2025-05-26 13:46:31] pAUC (0-20% FPR): 0.1582
+[2025-05-26 13:46:31] Normalized pAUC (0-20% FPR): 0.7912
+[2025-05-26 13:46:31] Sampling Strategy borderline_smote:
+[2025-05-26 13:46:31]   Avg pAUC (0-20% FPR): 0.8117
+[2025-05-26 13:46:31]   Avg ROC AUC: 0.9562
+[2025-05-26 13:46:31] 
+Training fold 1/3 with adasyn...
+[2025-05-26 13:47:07] 
+Fold 1 Results:
+[2025-05-26 13:47:07] ROC AUC: 0.9529
+[2025-05-26 13:47:07] pAUC (0-10% FPR): 0.0717
+[2025-05-26 13:47:07] Normalized pAUC (0-10% FPR): 0.7172
+[2025-05-26 13:47:07] pAUC (0-20% FPR): 0.1610
+[2025-05-26 13:47:07] Normalized pAUC (0-20% FPR): 0.8048
+[2025-05-26 13:47:07] 
+Training fold 2/3 with adasyn...
+[2025-05-26 13:47:43] 
+Fold 2 Results:
+[2025-05-26 13:47:43] ROC AUC: 0.9732
+[2025-05-26 13:47:43] pAUC (0-10% FPR): 0.0808
+[2025-05-26 13:47:43] Normalized pAUC (0-10% FPR): 0.8075
+[2025-05-26 13:47:43] pAUC (0-20% FPR): 0.1769
+[2025-05-26 13:47:43] Normalized pAUC (0-20% FPR): 0.8846
+[2025-05-26 13:47:43] 
+Training fold 3/3 with adasyn...
+[2025-05-26 13:48:21] 
+Fold 3 Results:
+[2025-05-26 13:48:21] ROC AUC: 0.9492
+[2025-05-26 13:48:21] pAUC (0-10% FPR): 0.0712
+[2025-05-26 13:48:21] Normalized pAUC (0-10% FPR): 0.7123
+[2025-05-26 13:48:21] pAUC (0-20% FPR): 0.1598
+[2025-05-26 13:48:21] Normalized pAUC (0-20% FPR): 0.7989
+[2025-05-26 13:48:21] Sampling Strategy adasyn:
+[2025-05-26 13:48:21]   Avg pAUC (0-20% FPR): 0.8294
+[2025-05-26 13:48:21]   Avg ROC AUC: 0.9584
+[2025-05-26 13:48:22] 
+Training fold 1/3 with smote_tomek...
+[2025-05-26 13:57:55] 
+Fold 1 Results:
+[2025-05-26 13:57:55] ROC AUC: 0.9534
+[2025-05-26 13:57:55] pAUC (0-10% FPR): 0.0667
+[2025-05-26 13:57:55] Normalized pAUC (0-10% FPR): 0.6669
+[2025-05-26 13:57:55] pAUC (0-20% FPR): 0.1615
+[2025-05-26 13:57:55] Normalized pAUC (0-20% FPR): 0.8073
+[2025-05-26 13:57:55] 
+Training fold 2/3 with smote_tomek...
+[2025-05-26 14:07:27] 
+Fold 2 Results:
+[2025-05-26 14:07:27] ROC AUC: 0.9724
+[2025-05-26 14:07:27] pAUC (0-10% FPR): 0.0760
+[2025-05-26 14:07:27] Normalized pAUC (0-10% FPR): 0.7599
+[2025-05-26 14:07:27] pAUC (0-20% FPR): 0.1719
+[2025-05-26 14:07:27] Normalized pAUC (0-20% FPR): 0.8597
+[2025-05-26 14:07:27] 
+Training fold 3/3 with smote_tomek...
+[2025-05-26 14:18:00] 
+Fold 3 Results:
+[2025-05-26 14:18:00] ROC AUC: 0.9583
+[2025-05-26 14:18:00] pAUC (0-10% FPR): 0.0725
+[2025-05-26 14:18:00] Normalized pAUC (0-10% FPR): 0.7247
+[2025-05-26 14:18:00] pAUC (0-20% FPR): 0.1631
+[2025-05-26 14:18:00] Normalized pAUC (0-20% FPR): 0.8154
+[2025-05-26 14:18:00] Sampling Strategy smote_tomek:
+[2025-05-26 14:18:00]   Avg pAUC (0-20% FPR): 0.8274
+[2025-05-26 14:18:00]   Avg ROC AUC: 0.9614
+[2025-05-26 14:18:00] Best Sampling Strategy: smote with pAUC = 0.8313
+[2025-05-26 14:18:00] XGBoost training completed in 0:35:07.452549
+[2025-05-26 14:18:00] 
+Saving XGBoost results...
+[2025-05-26 14:18:00] Generating XGBoost plots...
+[2025-05-26 14:18:01] Saving best XGBoost model...
+[2025-05-26 14:18:01] 
+--- CatBoost Training ---
+[2025-05-26 14:18:01] Starting CatBoost training at 14:18:01
+[2025-05-26 14:18:01] 
+Training fold 1/3 with smote...
+[2025-05-26 14:18:33] 
+Fold 1 Results:
+[2025-05-26 14:18:33] ROC AUC: 0.9573
+[2025-05-26 14:18:33] pAUC (0-10% FPR): 0.0723
+[2025-05-26 14:18:33] Normalized pAUC (0-10% FPR): 0.7232
+[2025-05-26 14:18:33] pAUC (0-20% FPR): 0.1640
+[2025-05-26 14:18:33] Normalized pAUC (0-20% FPR): 0.8201
+[2025-05-26 14:18:33] 
+Training fold 2/3 with smote...
+[2025-05-26 14:19:06] 
+Fold 2 Results:
+[2025-05-26 14:19:06] ROC AUC: 0.9649
+[2025-05-26 14:19:06] pAUC (0-10% FPR): 0.0694
+[2025-05-26 14:19:06] Normalized pAUC (0-10% FPR): 0.6939
+[2025-05-26 14:19:06] pAUC (0-20% FPR): 0.1442
+[2025-05-26 14:19:06] Normalized pAUC (0-20% FPR): 0.7208
+[2025-05-26 14:19:06] 
+Training fold 3/3 with smote...
+[2025-05-26 14:19:28] 
+Fold 3 Results:
+[2025-05-26 14:19:28] ROC AUC: 0.9483
+[2025-05-26 14:19:28] pAUC (0-10% FPR): 0.0709
+[2025-05-26 14:19:28] Normalized pAUC (0-10% FPR): 0.7089
+[2025-05-26 14:19:28] pAUC (0-20% FPR): 0.1606
+[2025-05-26 14:19:28] Normalized pAUC (0-20% FPR): 0.8030
+[2025-05-26 14:19:28] Sampling Strategy smote:
+[2025-05-26 14:19:28]   Avg pAUC (0-20% FPR): 0.7813
+[2025-05-26 14:19:28]   Avg ROC AUC: 0.9568
+[2025-05-26 14:19:28] 
+Training fold 1/3 with borderline_smote...
+[2025-05-26 14:20:00] 
+Fold 1 Results:
+[2025-05-26 14:20:00] ROC AUC: 0.9367
+[2025-05-26 14:20:00] pAUC (0-10% FPR): 0.0640
+[2025-05-26 14:20:00] Normalized pAUC (0-10% FPR): 0.6398
+[2025-05-26 14:20:00] pAUC (0-20% FPR): 0.1351
+[2025-05-26 14:20:00] Normalized pAUC (0-20% FPR): 0.6755
+[2025-05-26 14:20:00] 
+Training fold 2/3 with borderline_smote...
+[2025-05-26 14:20:53] 
+Fold 2 Results:
+[2025-05-26 14:20:53] ROC AUC: 0.9637
+[2025-05-26 14:20:53] pAUC (0-10% FPR): 0.0764
+[2025-05-26 14:20:53] Normalized pAUC (0-10% FPR): 0.7645
+[2025-05-26 14:20:53] pAUC (0-20% FPR): 0.1738
+[2025-05-26 14:20:53] Normalized pAUC (0-20% FPR): 0.8689
+[2025-05-26 14:20:53] 
+Training fold 3/3 with borderline_smote...
+[2025-05-26 14:21:17] 
+Fold 3 Results:
+[2025-05-26 14:21:17] ROC AUC: 0.9001
+[2025-05-26 14:21:17] pAUC (0-10% FPR): 0.0562
+[2025-05-26 14:21:17] Normalized pAUC (0-10% FPR): 0.5619
+[2025-05-26 14:21:17] pAUC (0-20% FPR): 0.1354
+[2025-05-26 14:21:17] Normalized pAUC (0-20% FPR): 0.6769
+[2025-05-26 14:21:17] Sampling Strategy borderline_smote:
+[2025-05-26 14:21:17]   Avg pAUC (0-20% FPR): 0.7404
+[2025-05-26 14:21:17]   Avg ROC AUC: 0.9335
+[2025-05-26 14:21:18] 
+Training fold 1/3 with adasyn...
+[2025-05-26 14:22:01] 
+Fold 1 Results:
+[2025-05-26 14:22:01] ROC AUC: 0.9579
+[2025-05-26 14:22:01] pAUC (0-10% FPR): 0.0575
+[2025-05-26 14:22:01] Normalized pAUC (0-10% FPR): 0.5754
+[2025-05-26 14:22:01] pAUC (0-20% FPR): 0.1418
+[2025-05-26 14:22:01] Normalized pAUC (0-20% FPR): 0.7088
+[2025-05-26 14:22:01] 
+Training fold 2/3 with adasyn...
+[2025-05-26 14:22:24] 
+Fold 2 Results:
+[2025-05-26 14:22:24] ROC AUC: 0.9617
+[2025-05-26 14:22:24] pAUC (0-10% FPR): 0.0782
+[2025-05-26 14:22:24] Normalized pAUC (0-10% FPR): 0.7821
+[2025-05-26 14:22:24] pAUC (0-20% FPR): 0.1731
+[2025-05-26 14:22:24] Normalized pAUC (0-20% FPR): 0.8654
+[2025-05-26 14:22:25] 
+Training fold 3/3 with adasyn...
+[2025-05-26 14:22:56] 
+Fold 3 Results:
+[2025-05-26 14:22:56] ROC AUC: 0.9518
+[2025-05-26 14:22:56] pAUC (0-10% FPR): 0.0704
+[2025-05-26 14:22:56] Normalized pAUC (0-10% FPR): 0.7043
+[2025-05-26 14:22:56] pAUC (0-20% FPR): 0.1497
+[2025-05-26 14:22:56] Normalized pAUC (0-20% FPR): 0.7485
+[2025-05-26 14:22:56] Sampling Strategy adasyn:
+[2025-05-26 14:22:56]   Avg pAUC (0-20% FPR): 0.7742
+[2025-05-26 14:22:56]   Avg ROC AUC: 0.9572
+[2025-05-26 14:22:57] 
+Training fold 1/3 with smote_tomek...
+[2025-05-26 14:32:48] 
+Fold 1 Results:
+[2025-05-26 14:32:48] ROC AUC: 0.9542
+[2025-05-26 14:32:48] pAUC (0-10% FPR): 0.0720
+[2025-05-26 14:32:48] Normalized pAUC (0-10% FPR): 0.7199
+[2025-05-26 14:32:48] pAUC (0-20% FPR): 0.0947
+[2025-05-26 14:32:48] Normalized pAUC (0-20% FPR): 0.4736
+[2025-05-26 14:32:48] 
+Training fold 2/3 with smote_tomek...
+[2025-05-26 14:42:05] 
+Fold 2 Results:
+[2025-05-26 14:42:05] ROC AUC: 0.9650
+[2025-05-26 14:42:05] pAUC (0-10% FPR): 0.0792
+[2025-05-26 14:42:05] Normalized pAUC (0-10% FPR): 0.7917
+[2025-05-26 14:42:05] pAUC (0-20% FPR): 0.1740
+[2025-05-26 14:42:05] Normalized pAUC (0-20% FPR): 0.8700
+[2025-05-26 14:42:05] 
+Training fold 3/3 with smote_tomek...
+[2025-05-26 14:52:16] 
+Fold 3 Results:
+[2025-05-26 14:52:16] ROC AUC: 0.9505
+[2025-05-26 14:52:16] pAUC (0-10% FPR): 0.0705
+[2025-05-26 14:52:16] Normalized pAUC (0-10% FPR): 0.7047
+[2025-05-26 14:52:16] pAUC (0-20% FPR): 0.1575
+[2025-05-26 14:52:16] Normalized pAUC (0-20% FPR): 0.7874
+[2025-05-26 14:52:16] Sampling Strategy smote_tomek:
+[2025-05-26 14:52:16]   Avg pAUC (0-20% FPR): 0.7103
+[2025-05-26 14:52:16]   Avg ROC AUC: 0.9566
+[2025-05-26 14:52:16] Best Sampling Strategy: smote with pAUC = 0.7813
+[2025-05-26 14:52:16] CatBoost training completed in 0:34:15.029620
+[2025-05-26 14:52:16] 
+Saving CatBoost results...
+[2025-05-26 14:52:16] Generating CatBoost plots...
+[2025-05-26 14:52:16] Saving best CatBoost model...
+[2025-05-26 14:52:16] 
+=== EfficientNet Training and Evaluation ===
+[2025-05-26 14:52:16] Starting EfficientNet training at 14:52:16
+[2025-05-26 14:52:16] Using device: cuda
+[2025-05-26 14:52:20] 
+Training EfficientNet fold 1/3...
+[2025-05-26 15:21:58] Computed Class Weights: tensor([1., 1.], device='cuda:0')
+[2025-05-26 15:59:07] Epoch 1/10:
+[2025-05-26 15:59:07] Train Loss: 0.0397, Train AUC: 0.7127
+[2025-05-26 15:59:07] Val Loss: 0.0232, Val AUC: 0.8085
+[2025-05-26 15:59:07] Learning Rate: 5.00e-05
+[2025-05-26 16:37:47] Epoch 2/10:
+[2025-05-26 16:37:47] Train Loss: 0.0347, Train AUC: 0.7963
+[2025-05-26 16:37:47] Val Loss: 0.0173, Val AUC: 0.8148
+[2025-05-26 16:37:47] Learning Rate: 4.42e-05
+[2025-05-26 17:16:46] Epoch 3/10:
+[2025-05-26 17:16:46] Train Loss: 0.0331, Train AUC: 0.8203
+[2025-05-26 17:16:46] Val Loss: 0.0223, Val AUC: 0.8232
+[2025-05-26 17:16:46] Learning Rate: 2.93e-05
+[2025-05-26 17:54:50] Epoch 4/10:
+[2025-05-26 17:54:50] Train Loss: 0.0321, Train AUC: 0.8328
+[2025-05-26 17:54:50] Val Loss: 0.0168, Val AUC: 0.8229
+[2025-05-26 17:54:50] Learning Rate: 1.25e-05
+[2025-05-26 18:31:31] Epoch 5/10:
+[2025-05-26 18:31:31] Train Loss: 0.0316, Train AUC: 0.8396
+[2025-05-26 18:31:31] Val Loss: 0.0151, Val AUC: 0.8205
+[2025-05-26 18:31:31] Learning Rate: 1.51e-06
+[2025-05-26 19:08:27] Epoch 6/10:
+[2025-05-26 19:08:27] Train Loss: 0.0314, Train AUC: 0.8419
+[2025-05-26 19:08:27] Val Loss: 0.0214, Val AUC: 0.8310
+[2025-05-26 19:08:27] Learning Rate: 1.51e-06
+[2025-05-26 19:58:08] Epoch 7/10:
+[2025-05-26 19:58:08] Train Loss: 0.0314, Train AUC: 0.8417
+[2025-05-26 19:58:08] Val Loss: 0.0177, Val AUC: 0.8311
+[2025-05-26 19:58:08] Learning Rate: 1.25e-05
+[2025-05-26 20:42:11] Epoch 8/10:
+[2025-05-26 20:42:11] Train Loss: 0.0314, Train AUC: 0.8415
+[2025-05-26 20:42:11] Val Loss: 0.0169, Val AUC: 0.8216
+[2025-05-26 20:42:11] Learning Rate: 2.93e-05
+[2025-05-26 21:26:07] Epoch 9/10:
+[2025-05-26 21:26:07] Train Loss: 0.0312, Train AUC: 0.8441
+[2025-05-26 21:26:07] Val Loss: 0.0176, Val AUC: 0.8209
+[2025-05-26 21:26:07] Learning Rate: 4.42e-05
+[2025-05-26 22:14:13] Epoch 10/10:
+[2025-05-26 22:14:13] Train Loss: 0.0311, Train AUC: 0.8453
+[2025-05-26 22:14:13] Val Loss: 0.0184, Val AUC: 0.8400
+[2025-05-26 22:14:13] Learning Rate: 5.00e-05
+[2025-05-26 22:17:35] 
+EfficientNet Fold 1 Results:
+[2025-05-26 22:17:35] ROC AUC: 0.8400
+[2025-05-26 22:17:35] pAUC (0-10% FPR): 0.0426
+[2025-05-26 22:17:35] Normalized pAUC (0-10% FPR): 0.4261
+[2025-05-26 22:17:35] pAUC (0-20% FPR): 0.1107
+[2025-05-26 22:17:35] Normalized pAUC (0-20% FPR): 0.5534
+[2025-05-26 22:17:36] 
+Training EfficientNet fold 2/3...
+[2025-05-26 22:44:49] Computed Class Weights: tensor([1., 1.], device='cuda:0')
+[2025-05-26 23:23:22] Epoch 1/10:
+[2025-05-26 23:23:22] Train Loss: 0.0326, Train AUC: 0.8274
+[2025-05-26 23:23:22] Val Loss: 0.0142, Val AUC: 0.8657
+[2025-05-26 23:23:22] Learning Rate: 5.00e-05
+[2025-05-27 00:02:38] Epoch 2/10:
+[2025-05-27 00:02:38] Train Loss: 0.0318, Train AUC: 0.8371
+[2025-05-27 00:02:38] Val Loss: 0.0190, Val AUC: 0.8500
+[2025-05-27 00:02:38] Learning Rate: 4.42e-05
+[2025-05-27 00:39:41] Epoch 3/10:
+[2025-05-27 00:39:41] Train Loss: 0.0312, Train AUC: 0.8451
+[2025-05-27 00:39:41] Val Loss: 0.0176, Val AUC: 0.8386
+[2025-05-27 00:39:41] Learning Rate: 2.93e-05
+[2025-05-27 01:19:24] Epoch 4/10:
+[2025-05-27 01:19:24] Train Loss: 0.0307, Train AUC: 0.8508
+[2025-05-27 01:19:24] Val Loss: 0.0148, Val AUC: 0.8420
+[2025-05-27 01:19:24] Learning Rate: 1.25e-05
+[2025-05-27 01:19:24] Early stopping triggered after 4 epochs
+[2025-05-27 01:22:46] 
+EfficientNet Fold 2 Results:
+[2025-05-27 01:22:46] ROC AUC: 0.8420
+[2025-05-27 01:22:46] pAUC (0-10% FPR): 0.0432
+[2025-05-27 01:22:46] Normalized pAUC (0-10% FPR): 0.4318
+[2025-05-27 01:22:46] pAUC (0-20% FPR): 0.1096
+[2025-05-27 01:22:46] Normalized pAUC (0-20% FPR): 0.5479
+[2025-05-27 01:22:46] 
+Training EfficientNet fold 3/3...
+[2025-05-27 01:49:55] Computed Class Weights: tensor([1., 1.], device='cuda:0')
+[2025-05-27 02:28:23] Epoch 1/10:
+[2025-05-27 02:28:23] Train Loss: 0.0309, Train AUC: 0.8484
+[2025-05-27 02:28:23] Val Loss: 0.0127, Val AUC: 0.8873
+[2025-05-27 02:28:23] Learning Rate: 5.00e-05
+[2025-05-27 03:05:31] Epoch 2/10:
+[2025-05-27 03:05:31] Train Loss: 0.0303, Train AUC: 0.8559
+[2025-05-27 03:05:31] Val Loss: 0.0121, Val AUC: 0.8669
+[2025-05-27 03:05:31] Learning Rate: 4.42e-05
+[2025-05-27 03:41:20] Epoch 3/10:
+[2025-05-27 03:41:20] Train Loss: 0.0297, Train AUC: 0.8623
+[2025-05-27 03:41:20] Val Loss: 0.0134, Val AUC: 0.8751
+[2025-05-27 03:41:20] Learning Rate: 2.93e-05
+[2025-05-27 04:31:47] Epoch 4/10:
+[2025-05-27 04:31:47] Train Loss: 0.0291, Train AUC: 0.8686
+[2025-05-27 04:31:47] Val Loss: 0.0125, Val AUC: 0.8611
+[2025-05-27 04:31:47] Learning Rate: 1.25e-05
+[2025-05-27 04:31:47] Early stopping triggered after 4 epochs
+[2025-05-27 04:34:48] 
+EfficientNet Fold 3 Results:
+[2025-05-27 04:34:48] ROC AUC: 0.8611
+[2025-05-27 04:34:48] pAUC (0-10% FPR): 0.0425
+[2025-05-27 04:34:48] Normalized pAUC (0-10% FPR): 0.4246
+[2025-05-27 04:34:48] pAUC (0-20% FPR): 0.1107
+[2025-05-27 04:34:48] Normalized pAUC (0-20% FPR): 0.5535
+[2025-05-27 04:34:48] 
+Saving EfficientNet results...
+[2025-05-27 04:34:48] Generating EfficientNet plots...
+[2025-05-27 04:34:50] Saving best EfficientNet model...
+[2025-05-27 04:34:50] 
+EfficientNet training and evaluation completed in 13:42:33.448409
+[2025-05-27 04:34:50] 
+=== Test Set Evaluation ===
+[2025-05-27 04:38:17] 
+Ensemble and Individual Model Results:
+[2025-05-27 04:38:17] 
+ENSEMBLE:
+[2025-05-27 04:38:17] ROC AUC: 0.9484
+[2025-05-27 04:38:17] Raw pAUC (0-10% FPR): 0.0584
+[2025-05-27 04:38:17] Normalized pAUC (0-10% FPR): 0.5840
+[2025-05-27 04:38:17] Raw pAUC (0-20% FPR): 0.1110
+[2025-05-27 04:38:17] Normalized pAUC (0-20% FPR): 0.5549
+[2025-05-27 04:38:17] 
+EFFICIENTNET:
+[2025-05-27 04:38:17] ROC AUC: 0.8432
+[2025-05-27 04:38:17] Raw pAUC (0-10% FPR): 0.0480
+[2025-05-27 04:38:17] Normalized pAUC (0-10% FPR): 0.4802
+[2025-05-27 04:38:17] Raw pAUC (0-20% FPR): 0.1202
+[2025-05-27 04:38:17] Normalized pAUC (0-20% FPR): 0.6009
+[2025-05-27 04:38:17] 
+LGB:
+[2025-05-27 04:38:17] ROC AUC: 0.9095
+[2025-05-27 04:38:17] Raw pAUC (0-10% FPR): 0.0637
+[2025-05-27 04:38:17] Normalized pAUC (0-10% FPR): 0.6373
+[2025-05-27 04:38:17] Raw pAUC (0-20% FPR): 0.1408
+[2025-05-27 04:38:17] Normalized pAUC (0-20% FPR): 0.7040
+[2025-05-27 04:38:17] 
+XGB:
+[2025-05-27 04:38:17] ROC AUC: 0.8631
+[2025-05-27 04:38:17] Raw pAUC (0-10% FPR): 0.0555
+[2025-05-27 04:38:17] Normalized pAUC (0-10% FPR): 0.5548
+[2025-05-27 04:38:17] Raw pAUC (0-20% FPR): 0.1204
+[2025-05-27 04:38:17] Normalized pAUC (0-20% FPR): 0.6021
+[2025-05-27 04:38:17] 
+CAT:
+[2025-05-27 04:38:17] ROC AUC: 0.8680
+[2025-05-27 04:38:17] Raw pAUC (0-10% FPR): 0.0568
+[2025-05-27 04:38:17] Normalized pAUC (0-10% FPR): 0.5683
+[2025-05-27 04:38:17] Raw pAUC (0-20% FPR): 0.1275
+[2025-05-27 04:38:17] Normalized pAUC (0-20% FPR): 0.6373
+[2025-05-27 04:38:17] 
+Test set evaluation completed in 0:03:27.340942
+[2025-05-27 04:38:17] 
+=== Pipeline Summary ===
+[2025-05-27 04:38:17] Total pipeline duration: 15:32:40.331419
+[2025-05-27 04:38:17] LightGBM training duration: 0:36:55.021176
+[2025-05-27 04:38:17] XGBoost training duration: 0:35:07.452549
+[2025-05-27 04:38:17] CatBoost training duration: 0:34:15.029620
+[2025-05-27 04:38:17] EfficientNet training duration: 13:42:33.448409
+[2025-05-27 04:38:17] Test set evaluation duration: 0:03:27.340942
+[2025-05-27 04:38:17] 
+All results have been saved to the 'out/20250526_130537_ensemble_img_metadata' directory
+[2025-05-27 04:38:17] 
+=== Pipeline completed successfully ===

@@ -1,0 +1,22 @@
+LightGBM Model Results:
+
+Training Duration: 0:36:55.021176
+Mean ROC AUC: 0.9490 (+/- 0.0252)
+Mean pAUC (0-10% FPR): 0.6833 (+/- 0.1216)
+Mean pAUC (0-20% FPR): 0.7864 (+/- 0.0988)
+Median pAUC (0-10% FPR): 0.6698
+Median pAUC (0-20% FPR): 0.7843
+
+Fold-wise Results:
+Fold 1 - ROC AUC: 0.9444, pAUC (0-10%): 0.5763, pAUC (0-20%): 0.7776
+Fold 2 - ROC AUC: 0.9656, pAUC (0-10%): 0.7670, pAUC (0-20%): 0.8475
+Fold 3 - ROC AUC: 0.9390, pAUC (0-10%): 0.6507, pAUC (0-20%): 0.7742
+Fold 4 - ROC AUC: 0.9407, pAUC (0-10%): 0.6629, pAUC (0-20%): 0.7643
+Fold 5 - ROC AUC: 0.9655, pAUC (0-10%): 0.7657, pAUC (0-20%): 0.8238
+Fold 6 - ROC AUC: 0.9333, pAUC (0-10%): 0.6086, pAUC (0-20%): 0.6625
+Fold 7 - ROC AUC: 0.9471, pAUC (0-10%): 0.6665, pAUC (0-20%): 0.7998
+Fold 8 - ROC AUC: 0.9636, pAUC (0-10%): 0.7512, pAUC (0-20%): 0.8342
+Fold 9 - ROC AUC: 0.9379, pAUC (0-10%): 0.6438, pAUC (0-20%): 0.7476
+Fold 10 - ROC AUC: 0.9464, pAUC (0-10%): 0.6767, pAUC (0-20%): 0.7910
+Fold 11 - ROC AUC: 0.9689, pAUC (0-10%): 0.7573, pAUC (0-20%): 0.8477
+Fold 12 - ROC AUC: 0.9357, pAUC (0-10%): 0.6731, pAUC (0-20%): 0.7671

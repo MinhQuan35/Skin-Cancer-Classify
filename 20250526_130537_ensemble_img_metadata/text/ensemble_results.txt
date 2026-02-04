@@ -1,0 +1,37 @@
+Ensemble Model Results:
+
+ENSEMBLE:
+ROC AUC: 0.9484
+Raw pAUC (0-10% FPR): 0.0584
+Normalized pAUC (0-10% FPR): 0.5840
+Raw pAUC (0-20% FPR): 0.1110
+Normalized pAUC (0-20% FPR): 0.5549
+
+EFFICIENTNET:
+ROC AUC: 0.8432
+Raw pAUC (0-10% FPR): 0.0480
+Normalized pAUC (0-10% FPR): 0.4802
+Raw pAUC (0-20% FPR): 0.1202
+Normalized pAUC (0-20% FPR): 0.6009
+
+LGB:
+ROC AUC: 0.9095
+Raw pAUC (0-10% FPR): 0.0637
+Normalized pAUC (0-10% FPR): 0.6373
+Raw pAUC (0-20% FPR): 0.1408
+Normalized pAUC (0-20% FPR): 0.7040
+
+XGB:
+ROC AUC: 0.8631
+Raw pAUC (0-10% FPR): 0.0555
+Normalized pAUC (0-10% FPR): 0.5548
+Raw pAUC (0-20% FPR): 0.1204
+Normalized pAUC (0-20% FPR): 0.6021
+
+CAT:
+ROC AUC: 0.8680
+Raw pAUC (0-10% FPR): 0.0568
+Normalized pAUC (0-10% FPR): 0.5683
+Raw pAUC (0-20% FPR): 0.1275
+Normalized pAUC (0-20% FPR): 0.6373
+

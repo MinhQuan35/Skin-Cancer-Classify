@@ -1,0 +1,22 @@
+EfficientNet Model Results:
+
+Mean ROC AUC: 0.8477 (+/- 0.0190)
+Mean pAUC (0-10% FPR): 0.0427 (+/- 0.0006)
+Mean Normalized pAUC (0-10% FPR): 0.4275 (+/- 0.0063)
+Mean pAUC (0-20% FPR): 0.1103 (+/- 0.0010)
+Mean Normalized pAUC (0-20% FPR): 0.5516 (+/- 0.0052)
+Median pAUC (0-10% FPR): 0.0426
+Median Normalized pAUC (0-10% FPR): 0.4261
+Median pAUC (0-20% FPR): 0.1107
+Median Normalized pAUC (0-20% FPR): 0.5534
+
+Fold-wise Results:
+Fold 1 - ROC AUC: 0.8400
+  pAUC (0-10% FPR): 0.0426, Normalized: 0.4261
+  pAUC (0-20% FPR): 0.1107, Normalized: 0.5534
+Fold 2 - ROC AUC: 0.8420
+  pAUC (0-10% FPR): 0.0432, Normalized: 0.4318
+  pAUC (0-20% FPR): 0.1096, Normalized: 0.5479
+Fold 3 - ROC AUC: 0.8611
+  pAUC (0-10% FPR): 0.0425, Normalized: 0.4246
+  pAUC (0-20% FPR): 0.1107, Normalized: 0.5535

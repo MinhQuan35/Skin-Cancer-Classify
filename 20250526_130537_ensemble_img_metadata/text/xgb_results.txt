@@ -1,0 +1,22 @@
+XGBoost Model Results:
+
+Training Duration: 0:35:07.452549
+Mean ROC AUC: 0.9590 (+/- 0.0184)
+Mean pAUC (0-10% FPR): 0.7199 (+/- 0.1005)
+Mean pAUC (0-20% FPR): 0.8250 (+/- 0.0645)
+Median pAUC (0-10% FPR): 0.7147
+Median pAUC (0-20% FPR): 0.8085
+
+Fold-wise Results:
+Fold 1 - ROC AUC: 0.9531, pAUC (0-10%): 0.6832, pAUC (0-20%): 0.8098
+Fold 2 - ROC AUC: 0.9725, pAUC (0-10%): 0.8163, pAUC (0-20%): 0.8794
+Fold 3 - ROC AUC: 0.9540, pAUC (0-10%): 0.6927, pAUC (0-20%): 0.8047
+Fold 4 - ROC AUC: 0.9481, pAUC (0-10%): 0.7010, pAUC (0-20%): 0.7950
+Fold 5 - ROC AUC: 0.9674, pAUC (0-10%): 0.7176, pAUC (0-20%): 0.8491
+Fold 6 - ROC AUC: 0.9529, pAUC (0-10%): 0.6400, pAUC (0-20%): 0.7912
+Fold 7 - ROC AUC: 0.9529, pAUC (0-10%): 0.7172, pAUC (0-20%): 0.8048
+Fold 8 - ROC AUC: 0.9732, pAUC (0-10%): 0.8075, pAUC (0-20%): 0.8846
+Fold 9 - ROC AUC: 0.9492, pAUC (0-10%): 0.7123, pAUC (0-20%): 0.7989
+Fold 10 - ROC AUC: 0.9534, pAUC (0-10%): 0.6669, pAUC (0-20%): 0.8073
+Fold 11 - ROC AUC: 0.9724, pAUC (0-10%): 0.7599, pAUC (0-20%): 0.8597
+Fold 12 - ROC AUC: 0.9583, pAUC (0-10%): 0.7247, pAUC (0-20%): 0.8154
